@@ -1,5 +1,3 @@
-import os
-
 import pytest
 import arcade
 from arcade import Texture

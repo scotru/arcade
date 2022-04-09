@@ -1,5 +1,3 @@
-import os
-import pytest
 import arcade
 
 SCREEN_WIDTH = 800
