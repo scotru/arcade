@@ -13,8 +13,14 @@ class BaseTextureCache:
     def __init__(self):
         pass
 
-    def __getitem__(self, key):
+    def clear(self):
         pass
+
+    def delete(self, key: str):
+        pass
+
+    def __getitem__(self, key):
+        return None
 
     def __setitem__(self, key, value):
         pass
@@ -23,19 +29,31 @@ class BaseTextureCache:
 class EternalTextureCache(BaseTextureCache):
 
     def __init__(self):
-        pass
+        self._data = dict()
+
+    def clear(self):
+        self._data = dict()
+
+    def delete(self, key: str):
+        del self._data[key]
 
     def __getitem__(self, key):
-        pass
+        return self._data.get(key, None)
 
     def __setitem__(self, key, value):
-        pass
+        self._data[key] = value
 
 
 class WeakTextureCache(BaseTextureCache):
 
     def __init__(self):
         self._data = weakref.WeakValueDictionary()
+
+    def clear(self):
+        self._data = weakref.WeakValueDictionary()
+
+    def delete(self, key: str):
+        del self._data[key]
 
     def __getitem__(self, key):
         return self._data.get(key, None)
@@ -45,12 +63,16 @@ class WeakTextureCache(BaseTextureCache):
 
 
 class NullTextureCache(BaseTextureCache):
+    pass
 
-    def __init__(self):
-        pass
+
+cache = WeakTextureCache()
 
 
 if __name__  == "__main__":
     cache = WeakTextureCache()
-    cache["thing"] = ImageData()
-    print(cache)
+    data = ImageData()
+    cache["thing"] = data
+    print(list(cache._data.items()))
+    data = None
+    print(list(cache._data.items()))
