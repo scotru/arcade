@@ -28,6 +28,13 @@ will be best to store their names in variables in case we need to change them la
     :caption: Multiple Levels - Constants
     :lines: 23-32
 
+Let's also add a couple of constants to make it easier to adjust the size of our tiles
+
+.. literalinclude:: ../../../arcade/examples/platform_tutorial/10_multiple_levels.py
+    :caption: Multiple Levels - Constants
+    :lines: 15-16
+
+
 Then in the ``__init__`` function we'll add two new values. One to know where the right
 edge of the map is, and one to keep track of what level we're on, and add a new game over sound.
 
